@@ -13,9 +13,7 @@
   .plans { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
   .plans--4 { grid-template-columns: repeat(2, 1fr); max-width: none; gap: 22px; }
   .plans:not(.plans--4) .plan--feature { order: -1; }
-  .plan__head { min-height: 0; }
   .plan__billed { min-height: 0; }
-  .includes__grid { grid-template-columns: 1fr; }
   .foot__grid { grid-template-columns: 1fr 1fr; gap: 34px; }
 }
 
@@ -38,7 +36,6 @@
   .grid-3, .grid-4, .steps, .leads { grid-template-columns: 1fr; }
   .plans--4 { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
   .vs { padding: 8px; border-radius: var(--r-lg); }
-  .ptable__head span { margin-left: 0; }
   .step::after { display: none; }
   .case__body { padding: 30px; }
   .case__stats { grid-template-columns: 1fr; padding: 26px 30px; gap: 22px; }

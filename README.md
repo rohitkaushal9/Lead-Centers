@@ -12,15 +12,19 @@ Zero dependencies, zero build step. Plain HTML, CSS and vanilla JavaScript so th
 can be dropped onto any static host (GitHub Pages, Netlify, Vercel, S3, nginx).
 
 ```
-index.html                    # full page, all 12 sections
+index.html                    # landing page, all 12 sections
+demo/
+  index.html                  # "Request a demo" page, served at /demo/
 assets/
   css/
     base.css                  # design tokens, reset, layout helpers, buttons
     layout.css                # header, mobile nav, hero, footer, reveal utility
     components.css            # section components (cards, filters, comparison, pricing)
     responsive.css            # all media queries, must load last
+    demo.css                  # demo page only, loaded after responsive.css
   js/
     main.js                   # mobile nav, live filter counter, scroll reveals
+    demo.js                   # demo form validation and success state
   img/
     favicon.svg               # browser tab icon
     logo.svg                  # wordmark for social cards and external use
@@ -83,3 +87,6 @@ The page is **light theme only** by design. No dark-mode variants are defined.
   real data.
 - All CTAs currently anchor within the page. Point them at the real signup flow
   before launch.
+- **The demo form has no backend.** `assets/js/demo.js` validates client-side and
+  shows a success state, but never POSTs. Replace the `TODO` in its submit handler
+  with a real request to your endpoint or form service.
