@@ -4,7 +4,7 @@
 /* --- Demo hero: navy panel left, floating form card right ---------------- */
 .demo {
   position: relative;
-  padding: 74px 0 96px;
+  padding: 78px 0 92px;
   overflow: hidden;
   background:
     radial-gradient(820px 460px at 88% 8%, rgba(69, 166, 224, .30) 0%, rgba(69, 166, 224, 0) 62%),
@@ -62,60 +62,37 @@
 }
 
 .demo__sub {
-  margin-top: 22px;
-  font-size: 17px;
+  margin-top: 20px;
+  font-size: 17.5px;
   color: rgba(255, 255, 255, .76);
   line-height: 1.68;
   max-width: 500px;
 }
 
 /* Value points */
-.demo__points { display: grid; gap: 4px; margin-top: 38px; }
+.demo__points { display: grid; gap: 6px; margin-top: 34px; }
 
 .dpoint {
-  display: grid; grid-template-columns: 42px 1fr; gap: 16px;
-  padding: 15px 16px 15px 14px;
+  display: grid; grid-template-columns: 40px 1fr; gap: 15px;
+  align-items: center;
+  padding: 11px 16px 11px 12px;
   border-radius: var(--r-md);
   transition: background .2s ease;
 }
 .dpoint:hover { background: rgba(255, 255, 255, .06); }
 
 .dpoint__ic {
-  width: 42px; height: 42px; border-radius: 12px;
+  width: 40px; height: 40px; border-radius: 11px;
   display: grid; place-items: center;
   background: rgba(255, 255, 255, .11);
   border: 1px solid rgba(255, 255, 255, .16);
   color: var(--sky);
 }
-.dpoint b { display: block; font-size: 15.5px; color: #fff; font-weight: 660; letter-spacing: -.012em; }
-.dpoint p { font-size: 13.8px; color: rgba(255, 255, 255, .66); margin-top: 4px; line-height: 1.55; }
-
-/* Testimonial */
-.dquote {
-  margin-top: 30px;
-  padding: 24px 26px;
-  border-radius: var(--r-lg);
-  background: rgba(255, 255, 255, .07);
-  border: 1px solid rgba(255, 255, 255, .13);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-.dquote p { font-size: 15px; color: rgba(255, 255, 255, .90); line-height: 1.6; font-weight: 520; }
-.dquote p::before { content: "\201C"; color: var(--sky); }
-.dquote p::after  { content: "\201D"; color: var(--sky); }
-.dquote__who { display: flex; align-items: center; gap: 12px; margin-top: 18px; }
-.dquote__av {
-  width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0;
-  display: grid; place-items: center;
-  font-size: 13px; font-weight: 750; color: #06203f;
-  background: linear-gradient(140deg, var(--sky), #7cc6f0);
-}
-.dquote__who b { display: block; font-size: 13.5px; color: #fff; font-weight: 640; }
-.dquote__who span { font-size: 12.5px; color: rgba(255, 255, 255, .58); }
+.dpoint b { font-size: 15.5px; color: #fff; font-weight: 620; letter-spacing: -.012em; }
 
 /* Reassurance pills */
 .demo__assure {
-  margin-top: 30px; padding-top: 26px;
+  margin-top: 32px; padding-top: 26px;
   border-top: 1px solid rgba(255, 255, 255, .14);
   display: flex; flex-wrap: wrap; gap: 10px;
 }
@@ -316,5 +293,4 @@
   .dstep::after { display: none; }
   .demo__assure { gap: 8px; }
   .assure { font-size: 12px; padding: 7px 12px; }
-  .dquote { padding: 20px; }
 }
