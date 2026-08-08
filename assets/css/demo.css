@@ -90,21 +90,6 @@
 }
 .dpoint b { font-size: 15.5px; color: #fff; font-weight: 620; letter-spacing: -.012em; }
 
-/* Reassurance pills */
-.demo__assure {
-  margin-top: 32px; padding-top: 26px;
-  border-top: 1px solid rgba(255, 255, 255, .14);
-  display: flex; flex-wrap: wrap; gap: 10px;
-}
-.assure {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 12.8px; font-weight: 560; color: rgba(255, 255, 255, .88);
-  background: rgba(255, 255, 255, .08);
-  border: 1px solid rgba(255, 255, 255, .15);
-  padding: 8px 14px; border-radius: 100px;
-}
-.assure svg { color: var(--sky); }
-
 /* --- Form card ----------------------------------------------------------- */
 .fcard {
   background: var(--surface);
@@ -291,6 +276,4 @@
   .dpoint { padding: 12px 10px; gap: 14px; }
   .dsteps { grid-template-columns: 1fr; }
   .dstep::after { display: none; }
-  .demo__assure { gap: 8px; }
-  .assure { font-size: 12px; padding: 7px 12px; }
 }
