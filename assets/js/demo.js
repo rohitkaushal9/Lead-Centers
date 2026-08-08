@@ -108,11 +108,13 @@
       body: data,
       headers: { 'Accept': 'application/json' }
     })
-      .then(function (res) {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        return res.json();
-      })
-      .then(function () {
+      .then(function (res) { return res.json(); })
+      .then(function (json) {
+        // FormSubmit answers 200 even when it refuses the submission, so the
+        // JSON body is the only reliable signal. Never trust res.ok alone.
+        var ok = json && String(json.success) === 'true';
+        if (!ok) throw new Error(json && json.message ? json.message : 'rejected');
+
         var first = String(data.get('name') || '').trim().split(/\s+/)[0];
         if (doneName && first) doneName.textContent = first;
         if (card && done) {
@@ -121,9 +123,22 @@
           card.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       })
-      .catch(function () {
+      .catch(function (err) {
         if (btn) { btn.disabled = false; btn.textContent = label; }
-        if (errBox) {
+        if (!errBox) return;
+
+        var msg = String((err && err.message) || '');
+
+        if (/web server|HTML files/i.test(msg)) {
+          // Opening the page straight off disk: the origin is null and the
+          // relay refuses it. Nothing the visitor can fix.
+          errBox.textContent = 'This form only works when the site is served over http, ' +
+                               'not opened as a local file. Run it through a web server, ' +
+                               'or message us on WhatsApp at +91 7018761328.';
+        } else if (/[Aa]ctivat/i.test(msg)) {
+          errBox.textContent = 'The form is not activated yet. Check the inbox for ' +
+                               'an "Activate Form" email and click the link, then try again.';
+        } else {
           errBox.textContent = 'Something went wrong sending that. Please try again, ' +
                                'or message us on WhatsApp at +91 7018761328.';
         }

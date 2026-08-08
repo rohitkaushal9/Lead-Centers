@@ -1,7 +1,23 @@
 /* Lead Centers | All media queries. Must load last.
-   Part of the split stylesheet. Load order: base, layout, components, responsive. */
+   Part of the split stylesheet. Load order: base, layout, components, motion,
+   responsive. Breakpoints, widest first:
 
-/* --- Responsive ---------------------------------------------------------- */
+     1280  large laptop trims
+     1024  tablet landscape: split layouts collapse to one column
+      860  nav collapses into the drawer
+      760  phone landscape / small tablet: everything goes single column
+      600  phone portrait
+      400  small phone
+   plus height and capability queries at the end.                           */
+
+/* --- 1280: keep wide layouts from crowding the viewport edge -------------- */
+@media (max-width: 1280px) {
+  :root { --gutter: 22px; }
+  .hero__grid { gap: 44px; }
+  .demo__grid { gap: 48px; }
+}
+
+/* --- 1024: tablet landscape ---------------------------------------------- */
 @media (max-width: 1024px) {
   .hero__grid { grid-template-columns: 1fr; gap: 48px; }
   .hero__sub { max-width: none; }
@@ -15,38 +31,156 @@
   .plans:not(.plans--4) .plan--feature { order: -1; }
   .plan__billed { min-height: 0; }
   .foot__grid { grid-template-columns: 1fr 1fr; gap: 34px; }
+
+  /* Directional reveals become vertical: sideways travel causes overflow
+     once the columns stack. */
+  .reveal--left, .reveal--right { transform: translateY(20px); }
 }
 
+/* --- 860: nav collapses --------------------------------------------------- */
 @media (max-width: 860px) {
-  .nav, .head-cta { display: none; }
-  .burger { display: flex; }
+  .nav { display: none; }
+
+  /* Keep only WhatsApp in the header bar; the rest moves into the drawer. */
+  .head-cta { gap: 8px; margin-left: auto; }
+  .head-cta > .btn:not(.btn--wa) { display: none; }
+
+  .burger { display: flex; margin-left: 0; }
+
   .nav-drop {
     border-top: 1px solid var(--line);
     background: var(--surface);
     padding: 16px var(--gutter) 22px;
+    max-height: calc(100vh - 68px);
+    overflow-y: auto;
   }
   .nav-drop.open { display: block; }
   .nav-drop a { display: block; padding: 11px 0; font-size: 15px; font-weight: 560; color: var(--ink-2); border-bottom: 1px solid var(--line); }
-  .nav-drop .btn { margin-top: 16px; }
+  /* .nav-drop a would otherwise flatten these to left-aligned blocks */
+  .nav-drop .btn {
+    display: inline-flex;
+    justify-content: center;
+    padding: 14px 22px;
+    margin-top: 14px;
+    border-bottom: 0;
+    color: #fff;
+  }
+  .nav-drop .btn--ghost { color: var(--ink); }
 }
 
+/* --- 760: single column --------------------------------------------------- */
 @media (max-width: 760px) {
-  section { padding: 62px 0; }
-  .hero { padding: 52px 0 58px; }
+  section { padding: 60px 0; }
+  .hero { padding: 46px 0 56px; }
+
   .grid-3, .grid-4, .steps, .leads { grid-template-columns: 1fr; }
   .plans--4 { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
-  .vs { padding: 8px; border-radius: var(--r-lg); }
   .step::after { display: none; }
+
   .case__body { padding: 30px; }
   .case__stats { grid-template-columns: 1fr; padding: 26px 30px; gap: 22px; }
   .finale { padding: 46px 24px; }
+  .foot__grid { grid-template-columns: 1fr; }
+
   .fresult { flex-wrap: wrap; }
   .fresult .btn { margin-left: 0; width: 100%; }
-  .foot__grid { grid-template-columns: 1fr; }
-  .btn { width: 100%; }
-  .hero__cta .btn, .finale__cta .btn { flex: 1 1 100%; }
+
+  /* Only the buttons that are meant to fill their container go full width.
+     A blanket rule here breaks the inline "Unlock" buttons on lead cards. */
+  .hero__cta .btn,
+  .finale__cta .btn,
+  .dcta .btn,
+  .plan .btn { width: 100%; flex: 1 1 100%; }
+
+  /* Comparison table: shrink the cells so less horizontal scrolling is needed */
+  .vs { padding: 8px; border-radius: var(--r-lg); }
+  .vs__table { min-width: 660px; }
+  .vs__table thead th { padding: 18px 14px; }
+  .vs__table tbody th,
+  .vs__table tbody td,
+  .vs__table tfoot td { padding: 14px; font-size: 13.5px; }
+  .vs__table tbody th b { font-size: 14px; }
+  .vs__table tbody th span { display: none; }
+  .vs__us--cap .vs__name { font-size: 17px; }
+  .vs__ribbon { top: 10px; right: 10px; font-size: 9.5px; padding: 3px 8px; }
+  col.c-feat { width: 34%; }
+
+  /* Keep the float clear of the footer's tap targets */
+  .wa { right: 14px; bottom: 14px; }
 }
 
+/* --- 600: phone portrait -------------------------------------------------- */
+@media (max-width: 600px) {
+  :root { --gutter: 18px; }
+  section { padding: 52px 0; }
+  .head { margin-bottom: 36px; }
+
+  .site-head__inner { height: 62px; gap: 12px; }
+  .brand__word b { font-size: 17.5px; }
+  .brand__word small { font-size: 10px; }
+
+  .card { padding: 22px; }
+  .plan { padding: 26px 20px; }
+  .lede { font-size: 16px; }
+
+  /* Lead cards: the masked contact and its button stop fighting for width */
+  .lead__lock { flex-wrap: wrap; gap: 12px; }
+  .lead__lock .masked { flex: 1 1 100%; }
+  .lead__lock .btn { width: 100%; }
+
+  /* Intent rows drop the score chip onto its own line rather than squeezing */
+  .intent { grid-template-columns: auto 1fr; row-gap: 10px; }
+  .intent .score { grid-column: 2; justify-self: start; }
+
+  .fgroup, .fpanel__head, .fresult { padding-inline: 18px; }
+  .chip { font-size: 12.5px; padding: 6px 12px; }
+
+  .hook { padding: 20px 18px; font-size: 12px; }
+  .quote { font-size: 19px; }
+  .kpi b { font-size: 28px; }
+  .plan__price b { font-size: 30px; }
+
+  .foot__base { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+/* --- 400: small phone ----------------------------------------------------- */
+@media (max-width: 400px) {
+  :root { --gutter: 15px; }
+
+  .hero h1, .demo h1 { font-size: 29px; letter-spacing: -.03em; }
+  .hero__sub, .demo__sub { font-size: 15.5px; }
+  .h2 { font-size: 25px; }
+
+  .btn--lg { padding: 15px 20px; font-size: 15.5px; }
+  .card__icon { width: 40px; height: 40px; }
+
+  .inbox__list { padding: 6px; }
+  .mailrow { grid-template-columns: 32px 1fr; padding: 11px; gap: 10px; }
+  .mailrow .avatar { width: 32px; height: 32px; font-size: 11px; }
+  .mailrow__time { display: none; }
+
+  .floatcard { position: static; margin-top: 14px; right: auto; bottom: auto; }
+
+  .plan__price b { font-size: 27px; }
+  .fdone { padding: 40px 20px; }
+  .wa { height: 48px; padding: 0 12px; }
+  .wa svg { width: 22px; height: 22px; }
+}
+
+/* --- Short viewports: phones in landscape --------------------------------- */
+@media (max-height: 520px) and (orientation: landscape) {
+  .hero, .demo { padding-top: 34px; padding-bottom: 40px; }
+  .nav-drop { max-height: calc(100vh - 56px); }
+}
+
+/* --- Touch devices: hover states never resolve ---------------------------- */
+@media (hover: none) {
+  .card:hover, .plan:hover, .itile:hover, .lead:hover { transform: none; }
+  .wa:hover { gap: 0; padding-right: 16px; transform: none; }
+  .wa:hover .wa__label { max-width: 0; opacity: 0; }
+}
+
+/* --- Reduced motion ------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }

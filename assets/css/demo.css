@@ -290,3 +290,22 @@
   font-size: 13px;
   line-height: 1.5;
 }
+
+/* --- Small phones ---------------------------------------------------------- */
+@media (max-width: 600px) {
+  .fcard__head { padding: 20px 18px; }
+  .fcard__body { padding: 18px; }
+  .fcard__head h2 { font-size: 19px; }
+  .field input, .field select, .field textarea { font-size: 16px; }
+  .dpoint b { font-size: 14.5px; }
+  .faq summary { padding: 17px 18px; font-size: 14.5px; }
+  .faq p { padding: 0 18px 18px; font-size: 14px; }
+}
+
+@media (max-width: 400px) {
+  .demo__points { margin-top: 26px; }
+  .dpoint { padding: 9px 8px; grid-template-columns: 36px 1fr; gap: 12px; }
+  .dpoint__ic { width: 36px; height: 36px; border-radius: 10px; }
+  .dpoint__ic svg { width: 17px; height: 17px; }
+  .fdone__ic { width: 54px; height: 54px; }
+}
