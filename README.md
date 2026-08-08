@@ -60,8 +60,11 @@ serve. Do not scatter stylesheets into page folders.
    `index.html`. The demo page already has the `../index.html#anchor` paths a
    subfolder needs; the root page uses bare `#anchor` links that will not work
    one level down.
-4. Link to it from other pages as `pricing/` from root, `../pricing/` from a
-   sibling page. Always keep the trailing slash.
+4. Link to it as `pricing/index.html` from root, `../pricing/index.html` from a
+   sibling page. **Write the `index.html` explicitly.** A folder-only link like
+   `pricing/` works on a web server but breaks when someone opens the site from
+   disk over `file://`, because browsers will not resolve a directory to its
+   index file on that protocol.
 5. If the page needs its own CSS, add `assets/css/pricing.css` and link it
    **after** `responsive.css`.
 

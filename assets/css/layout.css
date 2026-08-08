@@ -32,6 +32,18 @@
 
 .head-cta { display: flex; align-items: center; gap: 12px; }
 
+/* WhatsApp button: icon-only in the header, full width in the mobile drawer */
+.btn--wa {
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(18, 140, 70, .26), 0 6px 16px rgba(18, 140, 70, .22);
+}
+.btn--wa:hover { background: #1eb85a; }
+.btn--wa svg { flex-shrink: 0; }
+
+.head-cta .btn--wa { width: 38px; height: 38px; padding: 0; }
+.head-cta .btn--wa span { display: none; }
+
 .burger {
   display: none;
   margin-left: auto;
