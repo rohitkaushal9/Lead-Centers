@@ -87,10 +87,6 @@ The page is **light theme only** by design. No dark-mode variants are defined.
   real data.
 - All CTAs currently anchor within the page. Point them at the real signup flow
   before launch.
-- **The WhatsApp number is a placeholder.** Both pages link to
-  `https://wa.me/919999999999`. Replace that number (country code + number,
-  digits only, no `+` or spaces) in the float near the bottom of each HTML file
-  and in the footer link. Four occurrences in total.
 - **The demo form has no backend.** `assets/js/demo.js` validates client-side and
   shows a success state, but never POSTs. Replace the `TODO` in its submit handler
   with a real request to your endpoint or form service.
