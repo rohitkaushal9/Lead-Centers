@@ -476,3 +476,64 @@ col.c-us   { width: 25.5%; }
 .finale p { margin-top: 16px; font-size: 17.5px; color: rgba(255,255,255,.86); max-width: 600px; margin-inline: auto; }
 .finale__cta { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 34px; }
 .finale__note { margin-top: 20px; font-size: 13.5px; color: rgba(255,255,255,.72); }
+
+/* --- WhatsApp float ------------------------------------------------------ */
+.wa {
+  position: fixed;
+  right: 22px; bottom: 22px;
+  z-index: 80;
+  display: inline-flex; align-items: center; gap: 0;
+  height: 56px;
+  padding: 0 16px;
+  border-radius: 100px;
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(18, 140, 70, .34), 0 12px 30px rgba(18, 140, 70, .26);
+  transition: gap .22s ease, padding .22s ease, transform .18s ease, box-shadow .22s ease;
+  overflow: hidden;
+}
+.wa:hover {
+  gap: 10px;
+  padding-right: 22px;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(18, 140, 70, .4), 0 18px 40px rgba(18, 140, 70, .3);
+}
+.wa svg { flex-shrink: 0; }
+
+.wa__label {
+  max-width: 0;
+  white-space: nowrap;
+  font-size: 14.5px;
+  font-weight: 640;
+  opacity: 0;
+  transition: max-width .22s ease, opacity .18s ease;
+}
+.wa:hover .wa__label,
+.wa:focus-visible .wa__label { max-width: 190px; opacity: 1; }
+
+/* Attention ping, fires once on load then settles */
+.wa::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  border: 2px solid #25d366;
+  animation: wa-ping 2.4s ease-out 3;
+  pointer-events: none;
+}
+@keyframes wa-ping {
+  0%   { transform: scale(1);    opacity: .7; }
+  70%  { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+.wa:hover::before { animation: none; }
+
+@media (max-width: 760px) {
+  .wa { right: 16px; bottom: 16px; height: 52px; padding: 0 14px; }
+  .wa:hover { gap: 0; padding-right: 14px; }
+  .wa:hover .wa__label { max-width: 0; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa::before { animation: none; }
+}
