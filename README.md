@@ -61,22 +61,38 @@ serve. Do not scatter stylesheets into page folders.
    `index.html`. The demo page already has the `../index.html#anchor` paths a
    subfolder needs; the root page uses bare `#anchor` links that will not work
    one level down.
-4. Link to it as `pricing/index.html` from root, `../pricing/index.html` from a
-   sibling page. **Write the `index.html` explicitly.** A folder-only link like
-   `pricing/` works on a web server but breaks when someone opens the site from
-   disk over `file://`, because browsers will not resolve a directory to its
-   index file on that protocol.
+4. Link to it as `pricing/` from root, `../pricing/` from a sibling page. Never
+   write `index.html` into a link: it shows up in the address bar as
+   `/pricing/index.html`. Vercel's `cleanUrls` also rewrites `/pricing/` to
+   `/pricing`, so that is the URL visitors end up on.
 5. If the page needs its own CSS, add `assets/css/pricing.css` and link it
    **after** `responsive.css`.
 
 ## Run locally
 
-Open `index.html` directly, or serve it:
+**Serve it. Do not open the files directly.** Internal links point at
+directories (`demo/`, `../`), which browsers cannot resolve over `file://`, and
+the demo form's relay rejects submissions from a null origin.
 
 ```bash
 python -m http.server 8080
 # then visit http://localhost:8080
 ```
+
+## Deployment
+
+Live at **https://lead-centers.vercel.app** (Vercel project `karamlok/lead-centers`).
+
+```bash
+vercel deploy --prod
+```
+
+`vercel.json` enables `cleanUrls`, sets a one-year immutable cache on
+`/assets/*`, and applies nosniff, SAMEORIGIN, referrer and permissions headers.
+
+Note the build-specific URL that each deploy prints
+(`lead-centers-<hash>-karamlok.vercel.app`) sits behind Vercel's SSO protection
+and will 302 for anyone else. Share the clean production domain instead.
 
 ## Page structure
 
