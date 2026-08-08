@@ -21,6 +21,7 @@ assets/                       # shared by every page
     base.css                  # design tokens, reset, layout helpers, buttons
     layout.css                # header, mobile nav, hero, footer, reveal utility
     components.css            # section components (cards, filters, comparison, pricing)
+    motion.css                # scroll reveals, hero entrance, progress bar
     responsive.css            # all media queries, must load last
     demo.css                  # demo page only, loaded after responsive.css
   js/
@@ -122,6 +123,13 @@ The page is **light theme only** by design. No dark-mode variants are defined.
   real data.
 - All CTAs currently anchor within the page. Point them at the real signup flow
   before launch.
-- **The demo form has no backend.** `assets/js/demo.js` validates client-side and
-  shows a success state, but never POSTs. Replace the `TODO` in its submit handler
-  with a real request to your endpoint or form service.
+- **Demo form delivery.** Submissions POST to FormSubmit, which relays them by
+  email to `kaushalrohit482@gmail.com` (set as `ENDPOINT_EMAIL` in
+  `assets/js/demo.js`). The very first submission triggers a one-off confirmation
+  email that must be accepted before entries start arriving. Note the address is
+  visible in the page source; FormSubmit issues a hashed endpoint after
+  activation that can be used instead.
+- **Motion.** `assets/css/motion.css` plus the observer in `main.js` drive every
+  scroll reveal. Add `reveal` to any new element to opt it in, with
+  `reveal--left`, `--right`, `--scale`, `--fade`, `--rise` or `--slow` as
+  modifiers. Stagger is computed automatically from sibling order.

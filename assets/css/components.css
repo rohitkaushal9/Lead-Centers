@@ -274,9 +274,13 @@ col.c-us   { width: 25.5%; }
 }
 .itile:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--brand-border); }
 .itile__logo {
-  width: 42px; height: 42px; margin: 0 auto 12px; border-radius: 11px;
-  display: grid; place-items: center; font-weight: 800; font-size: 15px; color: #fff;
+  width: 46px; height: 46px; margin: 0 auto 12px; border-radius: 12px;
+  display: grid; place-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
 }
+.itile:hover .itile__logo { background: var(--surface); }
+.itile__logo svg { display: block; }
 .itile b { display: block; font-size: 14px; color: var(--ink); font-weight: 640; }
 .itile span { font-size: 12px; color: var(--muted-2); }
 

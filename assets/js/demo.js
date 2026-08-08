@@ -1,10 +1,16 @@
 /* ==========================================================================
    Lead Centers | Request a demo form
-   Client-side validation and success state. No backend is wired up yet:
-   swap the submit handler's TODO for a real POST when the endpoint exists.
+   Client-side validation, then POSTs to FormSubmit, which relays the entry to
+   ENDPOINT_EMAIL. Swap ENDPOINT for your own API if you move off FormSubmit.
    ========================================================================== */
 (function () {
   'use strict';
+
+  // Where demo requests are delivered. FormSubmit relays the submission by
+  // email with no server of our own. The first submission triggers a one-off
+  // confirmation email that must be accepted before entries start arriving.
+  var ENDPOINT_EMAIL = 'kaushalrohit482@gmail.com';
+  var ENDPOINT = 'https://formsubmit.co/ajax/' + ENDPOINT_EMAIL;
 
   var form = document.getElementById('demoForm');
   if (!form) return;
@@ -13,6 +19,7 @@
   var done        = document.getElementById('fdone');
   var doneName    = document.getElementById('doneName');
   var consentWrap = document.getElementById('consentWrap');
+  var errBox      = document.getElementById('formError');
 
   var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   // Free-mail domains are allowed, but we nudge toward a work address
@@ -86,21 +93,40 @@
       return;
     }
 
-    // Collect the payload, ready for a real endpoint
-    var payload = {};
-    new FormData(form).forEach(function (v, k) { payload[k] = v; });
+    var data = new FormData(form);
+    data.append('_subject', 'New demo request from ' + (data.get('company') || 'a visitor'));
+    data.append('_template', 'table');
+    data.append('_captcha', 'false');
 
-    // TODO: POST `payload` to the demo-request endpoint, then show the success
-    // state on a 2xx and surface an error message otherwise.
-    if (window.console && console.info) console.info('Demo request payload', payload);
+    var btn = form.querySelector('button[type="submit"]');
+    var label = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+    if (errBox) errBox.textContent = '';
 
-    var first = (payload.name || '').trim().split(/\s+/)[0];
-    if (doneName && first) doneName.textContent = first;
-
-    if (card && done) {
-      card.classList.add('is-done');
-      done.classList.add('is-on');
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    fetch(ENDPOINT, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function () {
+        var first = String(data.get('name') || '').trim().split(/\s+/)[0];
+        if (doneName && first) doneName.textContent = first;
+        if (card && done) {
+          card.classList.add('is-done');
+          done.classList.add('is-on');
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      })
+      .catch(function () {
+        if (btn) { btn.disabled = false; btn.textContent = label; }
+        if (errBox) {
+          errBox.textContent = 'Something went wrong sending that. Please try again, ' +
+                               'or message us on WhatsApp at +91 7018761328.';
+        }
+      });
   });
 })();

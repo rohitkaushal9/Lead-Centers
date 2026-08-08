@@ -277,3 +277,16 @@
   .dsteps { grid-template-columns: 1fr; }
   .dstep::after { display: none; }
 }
+
+/* Submit error message */
+.form-error:empty { display: none; }
+.form-error {
+  margin-bottom: 14px;
+  padding: 11px 14px;
+  border-radius: var(--r-md);
+  background: #fdf2f2;
+  border: 1px solid #f3c9c9;
+  color: #a03030;
+  font-size: 13px;
+  line-height: 1.5;
+}

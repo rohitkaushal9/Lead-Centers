@@ -91,23 +91,63 @@
 
   if (countEl) recount();
 
-  /* --- Reveal on scroll --------------------------------------------------- */
-  var revealables = document.querySelectorAll('.reveal');
+  /* --- Reveal on scroll --------------------------------------------------
+     Each .reveal element gets a stagger delay based on its position among its
+     revealing siblings, so grids cascade instead of all landing at once.   */
+  var revealables = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
 
-  if (!('IntersectionObserver' in window)) {
+  var reduced = window.matchMedia &&
+                window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduced || !('IntersectionObserver' in window)) {
     revealables.forEach(function (el) { el.classList.add('in'); });
   } else {
+    revealables.forEach(function (el) {
+      var sibs = Array.prototype.filter.call(el.parentNode.children, function (c) {
+        return c.classList && c.classList.contains('reveal');
+      });
+      var i = sibs.indexOf(el);
+      // cap the cascade so long grids do not leave the last card hanging
+      el.style.setProperty('--d', Math.min(i, 7) * 75 + 'ms');
+    });
+
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry, i) {
+      entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        // Slight stagger for siblings entering together
-        setTimeout(function () { entry.target.classList.add('in'); }, i * 70);
+        entry.target.classList.add('in');
         io.unobserve(entry.target);
       });
-    }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
 
     revealables.forEach(function (el) { io.observe(el); });
   }
+
+  /* --- Scroll progress bar + header state --------------------------------- */
+  var bar  = document.getElementById('progress');
+  var head = document.querySelector('.site-head');
+  var ticking = false;
+
+  function onScroll() {
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (bar) {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = max > 0 ? Math.min(y / max, 1) : 0;
+      bar.style.transform = 'scaleX(' + pct + ')';
+    }
+
+    if (head) head.classList.toggle('is-stuck', y > 8);
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(onScroll);
+  }, { passive: true });
+
+  onScroll();
 
   /* --- Footer year -------------------------------------------------------- */
   var yr = document.getElementById('yr');
