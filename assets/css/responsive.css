@@ -1,0 +1,57 @@
+/* Lead Centers | All media queries. Must load last.
+   Part of the split stylesheet. Load order: base, layout, components, responsive. */
+
+/* --- Responsive ---------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .hero__grid { grid-template-columns: 1fr; gap: 48px; }
+  .hero__sub { max-width: none; }
+  .floatcard { right: 8px; }
+  .guarantee, .filters { grid-template-columns: 1fr; gap: 40px; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .case { grid-template-columns: 1fr; }
+  .case__stats { border-left: 0; border-top: 1px solid var(--line); grid-template-columns: repeat(3, 1fr); padding: 30px 36px; }
+  .plans { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
+  .plans--4 { grid-template-columns: repeat(2, 1fr); max-width: none; gap: 22px; }
+  .plans:not(.plans--4) .plan--feature { order: -1; }
+  .plan__head { min-height: 0; }
+  .plan__billed { min-height: 0; }
+  .includes__grid { grid-template-columns: 1fr; }
+  .foot__grid { grid-template-columns: 1fr 1fr; gap: 34px; }
+}
+
+@media (max-width: 860px) {
+  .nav, .head-cta { display: none; }
+  .burger { display: flex; }
+  .nav-drop {
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+    padding: 16px var(--gutter) 22px;
+  }
+  .nav-drop.open { display: block; }
+  .nav-drop a { display: block; padding: 11px 0; font-size: 15px; font-weight: 560; color: var(--ink-2); border-bottom: 1px solid var(--line); }
+  .nav-drop .btn { margin-top: 16px; }
+}
+
+@media (max-width: 760px) {
+  section { padding: 62px 0; }
+  .hero { padding: 52px 0 58px; }
+  .grid-3, .grid-4, .steps, .leads { grid-template-columns: 1fr; }
+  .plans--4 { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
+  .vs { padding: 8px; border-radius: var(--r-lg); }
+  .ptable__head span { margin-left: 0; }
+  .step::after { display: none; }
+  .case__body { padding: 30px; }
+  .case__stats { grid-template-columns: 1fr; padding: 26px 30px; gap: 22px; }
+  .finale { padding: 46px 24px; }
+  .fresult { flex-wrap: wrap; }
+  .fresult .btn { margin-left: 0; width: 100%; }
+  .foot__grid { grid-template-columns: 1fr; }
+  .btn { width: 100%; }
+  .hero__cta .btn, .finale__cta .btn { flex: 1 1 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}

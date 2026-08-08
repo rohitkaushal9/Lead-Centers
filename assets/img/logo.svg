@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" width="320" height="64">
+  <title>Lead Centers</title>
+  <text x="0" y="34" font-family="Inter, Segoe UI, Arial, sans-serif"
+        font-size="30" font-weight="800" letter-spacing="-0.8">
+    <tspan fill="#143a75">Lead</tspan><tspan fill="#45a6e0">Centers</tspan>
+  </text>
+  <text x="2" y="52" font-family="Inter, Segoe UI, Arial, sans-serif"
+        font-size="12" font-weight="500" fill="#8b93a5">powered by Eva</text>
+</svg>

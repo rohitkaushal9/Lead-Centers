@@ -12,10 +12,22 @@ Zero dependencies, zero build step. Plain HTML, CSS and vanilla JavaScript so th
 can be dropped onto any static host (GitHub Pages, Netlify, Vercel, S3, nginx).
 
 ```
-index.html              # full page, all 12 sections
-assets/css/styles.css   # design tokens + all component styles (light theme)
-assets/js/main.js       # mobile nav, live filter counter, scroll reveals
+index.html                    # full page, all 12 sections
+assets/
+  css/
+    base.css                  # design tokens, reset, layout helpers, buttons
+    layout.css                # header, mobile nav, hero, footer, reveal utility
+    components.css            # section components (cards, filters, comparison, pricing)
+    responsive.css            # all media queries, must load last
+  js/
+    main.js                   # mobile nav, live filter counter, scroll reveals
+  img/
+    favicon.svg               # browser tab icon
+    logo.svg                  # wordmark for social cards and external use
 ```
+
+The four stylesheets are linked in cascade order in `<head>`. `responsive.css` holds
+every media query and must stay last.
 
 ## Run locally
 
@@ -45,7 +57,7 @@ python -m http.server 8080
 
 ## Brand tokens
 
-Sampled from the Lead Centers logo. All defined at the top of `assets/css/styles.css`:
+Sampled from the Lead Centers logo. All defined in `assets/css/base.css`:
 
 | Token | Value | Use |
 |-------|-------|-----|
@@ -60,6 +72,7 @@ The page is **light theme only** by design. No dark-mode variants are defined.
 
 - No em dashes anywhere in the copy. Use commas, periods, or a middot separator (`·`).
 - Section headings lead directly with the `<h2>`. There are no eyebrow/kicker labels.
+- The logo is a plain wordmark. No boxed/tiled mark in the header or footer.
 
 ## Notes
 

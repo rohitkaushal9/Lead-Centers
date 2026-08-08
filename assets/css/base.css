@@ -1,0 +1,157 @@
+/* Lead Centers | Foundations: design tokens, reset, layout helpers, buttons
+   Part of the split stylesheet. Load order: base, layout, components, responsive. */
+
+/* --- Design tokens ------------------------------------------------------- */
+:root {
+  /* Brand, sampled from the Lead Centers logo */
+  --navy:         #143a75;  /* logo background navy */
+  --sky:          #45a6e0;  /* "Centers" light blue */
+  --brand:        #1a56a8;  /* primary action blue */
+  --brand-dark:   #143a75;
+  --brand-soft:   #eaf2fc;
+  --brand-border: #c3ddf5;
+
+  /* Accents */
+  --green:        #16a34a;
+  --green-soft:   #eafaf0;
+  --amber:        #b45309;
+  --amber-soft:   #fef6e7;
+  --violet:       #2f8fce;  /* sky family, used for intent/secondary tags */
+  --violet-soft:  #e7f4fd;
+
+  /* Neutrals */
+  --ink:          #0f172a;
+  --ink-2:        #334155;
+  --muted:        #5b6478;
+  --muted-2:      #8b93a5;
+  --line:         #e6e9f0;
+  --line-strong:  #d3d9e4;
+  --surface:      #ffffff;
+  --surface-2:    #f7f8fb;
+  --surface-3:    #f1f3f9;
+
+  /* Shape & depth */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-xl: 26px;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, .06), 0 1px 3px rgba(15, 23, 42, .04);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, .06), 0 12px 28px rgba(15, 23, 42, .05);
+  --shadow-lg: 0 10px 24px rgba(15, 23, 42, .08), 0 28px 60px rgba(15, 23, 42, .08);
+
+  /* Layout */
+  --maxw: 1180px;
+  --gutter: 24px;
+
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* --- Base ---------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img, svg { max-width: 100%; display: block; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+/* --- Layout helpers ------------------------------------------------------ */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+section { padding: 88px 0; }
+.section--tint { background: var(--surface-2); }
+.section--edge { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+.head { max-width: 720px; margin: 0 auto 52px; text-align: center; }
+.head--left { margin-inline: 0; text-align: left; }
+
+.h2 { font-size: clamp(28px, 3.6vw, 42px); }
+.h3 { font-size: clamp(21px, 2.2vw, 26px); }
+
+.lede {
+  margin-top: 16px;
+  font-size: 17.5px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.grid { display: grid; gap: 22px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* --- Buttons ------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 620;
+  line-height: 1;
+  padding: 14px 22px;
+  border-radius: var(--r-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform .14s ease, box-shadow .18s ease, background .18s ease,
+              border-color .18s ease, color .18s ease;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn--primary {
+  background: var(--brand);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(26, 86, 168,.28), 0 8px 20px rgba(26, 86, 168,.24);
+}
+.btn--primary:hover { background: var(--brand-dark); box-shadow: 0 2px 4px rgba(26,86,168,.3), 0 14px 28px rgba(26,86,168,.28); }
+
+.btn--ghost {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-sm);
+}
+.btn--ghost:hover { border-color: var(--muted-2); background: var(--surface-2); }
+
+.btn--sm { padding: 10px 16px; font-size: 14px; }
+.btn--lg { padding: 17px 30px; font-size: 16.5px; }
+.btn--block { width: 100%; }
+
+.btn--onbrand { background: #fff; color: var(--brand-dark); }
+.btn--onbrand:hover { background: #f3f6ff; }
+
+.btn--outline-light {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, .45);
+}
+.btn--outline-light:hover { background: rgba(255, 255, 255, .12); border-color: #fff; }

@@ -12,8 +12,13 @@
 <meta property="og:title" content="Lead Centers | Verified Inbound Project Leads">
 <meta property="og:description" content="Real-time, intent-verified client inquiries delivered straight to your inbox or CRM. 3-day free trial, no commitment.">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23143a75'/><text x='16' y='14' font-family='Arial' font-size='11' font-weight='bold' fill='%23fff' text-anchor='middle'>L</text><text x='16' y='26' font-family='Arial' font-size='11' font-weight='bold' fill='%2345a6e0' text-anchor='middle'>C</text></svg>">
-<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+
+<!-- Stylesheets: load order matters, responsive must come last -->
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 <body>
 
@@ -22,7 +27,6 @@
   <div class="wrap">
     <div class="site-head__inner" id="headInner">
       <a href="#top" class="brand" aria-label="Lead Centers home">
-        <span class="brand__mark" aria-hidden="true"><i>Lead</i><i>Centers</i></span>
         <span class="brand__word">
           <b>Lead<em>Centers</em></b>
           <small>powered by Eva</small>
@@ -83,14 +87,6 @@
           No credit card for the trial · Cancel any time · Leads delivered within minutes
         </p>
 
-        <div class="trustbar">
-          <div class="trustbar__stats">
-            <div class="stat"><div class="stat__num">95%+</div><div class="stat__lbl">Verified deliverability</div></div>
-            <div class="stat"><div class="stat__num">100%</div><div class="stat__lbl">Inbound buyer intent</div></div>
-            <div class="stat"><div class="stat__num">&lt; 5 min</div><div class="stat__lbl">Avg. delivery time</div></div>
-            <div class="stat"><div class="stat__num">4</div><div class="stat__lbl">Service categories</div></div>
-          </div>
-        </div>
       </div>
 
       <div class="hero__visual">
@@ -925,7 +921,6 @@
     <div class="foot__grid foot">
       <div class="foot__about">
         <a href="#top" class="brand">
-          <span class="brand__mark" aria-hidden="true"><i>Lead</i><i>Centers</i></span>
           <span class="brand__word"><b>Lead<em>Centers</em></b><small>powered by Eva</small></span>
         </a>
         <p>Verified, intent-scored inbound project leads delivered in real time to agencies, studios and freelancers.</p>
