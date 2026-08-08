@@ -12,10 +12,11 @@ Zero dependencies, zero build step. Plain HTML, CSS and vanilla JavaScript so th
 can be dropped onto any static host (GitHub Pages, Netlify, Vercel, S3, nginx).
 
 ```
-index.html                    # landing page, all 12 sections
+.nojekyll                     # tells GitHub Pages to serve files as-is
+index.html                    # landing page, all 12 sections    ->  /
 demo/
-  index.html                  # "Request a demo" page, served at /demo/
-assets/
+  index.html                  # "Request a demo" page            ->  /demo/
+assets/                       # shared by every page
   css/
     base.css                  # design tokens, reset, layout helpers, buttons
     layout.css                # header, mobile nav, hero, footer, reveal utility
@@ -30,8 +31,39 @@ assets/
     logo.svg                  # wordmark for social cards and external use
 ```
 
-The four stylesheets are linked in cascade order in `<head>`. `responsive.css` holds
-every media query and must stay last.
+The four shared stylesheets are linked in cascade order in `<head>`.
+`responsive.css` holds every media query and must stay last. Page-specific CSS
+(like `demo.css`) loads after it.
+
+## Folder convention
+
+**One folder per page, assets shared.**
+
+Every page except home lives in its own directory as `index.html`, so the URL is a
+clean `/demo/` rather than `/demo.html`. Home is the single exception: it must stay
+at the repo root, because that is what a static host serves for `/`.
+
+CSS, JS and images are shared across pages and live in `/assets`. Page-specific
+files still belong there (see `demo.css`, `demo.js`), named after the page they
+serve. Do not scatter stylesheets into page folders.
+
+### Adding a new page
+
+1. Create the directory and file: `pricing/index.html`
+2. Reference shared assets with `../`:
+   ```html
+   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+   <link rel="stylesheet" href="../assets/css/base.css">
+   <script src="../assets/js/main.js"></script>
+   ```
+3. Copy the `<header>` and `<footer>` from `demo/index.html`, not from
+   `index.html`. The demo page already has the `../index.html#anchor` paths a
+   subfolder needs; the root page uses bare `#anchor` links that will not work
+   one level down.
+4. Link to it from other pages as `pricing/` from root, `../pricing/` from a
+   sibling page. Always keep the trailing slash.
+5. If the page needs its own CSS, add `assets/css/pricing.css` and link it
+   **after** `responsive.css`.
 
 ## Run locally
 
