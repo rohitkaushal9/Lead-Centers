@@ -31,8 +31,6 @@
 .nav a:hover { color: var(--ink); }
 
 .head-cta { display: flex; align-items: center; gap: 12px; }
-.head-cta .link { font-size: 14.5px; font-weight: 560; color: var(--ink); }
-.head-cta .link:hover { color: var(--brand); }
 
 .burger {
   display: none;
