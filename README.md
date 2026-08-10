@@ -90,6 +90,18 @@ vercel deploy --prod
 `vercel.json` enables `cleanUrls`, sets a one-year immutable cache on
 `/assets/*`, and applies nosniff, SAMEORIGIN, referrer and permissions headers.
 
+### Cache busting, important
+
+Asset filenames never change, and `/assets/*` is cached for a year as
+`immutable`. Every stylesheet and script is therefore referenced with a version
+query, `assets/css/components.css?v=2`.
+
+**After editing any file under `assets/`, bump that number in both
+`index.html` and `demo/index.html`.** Forget it and returning visitors keep the
+old CSS against the new HTML, which silently breaks layouts. This exact bug
+turned the guarantee list into one word per line: the icon column was removed
+from the markup while browsers still held CSS that reserved 42px for it.
+
 Note the build-specific URL that each deploy prints
 (`lead-centers-<hash>-karamlok.vercel.app`) sits behind Vercel's SSO protection
 and will 302 for anyone else. Share the clean production domain instead.
