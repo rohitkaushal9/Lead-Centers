@@ -98,3 +98,25 @@
   .floatcard { animation: none; opacity: 1; transform: none; }
   .progress { display: none; }
 }
+
+/* --- Hero gradient drift -------------------------------------------------
+   Continuous, symmetrical travel behind the hero, on an alternating loop so
+   it never snaps back. Slow enough to register as atmosphere, not motion. */
+@keyframes hero-drift {
+  from { transform: translate3d(0, -5%, 0); }
+  to   { transform: translate3d(0,  5%, 0); }
+}
+
+/* --- Hero push-in --------------------------------------------------------
+   The hero object enters slightly oversized and settles to true size, so it
+   reads as a push-in rather than a slide. Rides the reveal system above,
+   which already supplies the opacity fade and the in-view trigger.        */
+.reveal--push { transform: scale(1.04); }
+.hero__visual.reveal--push {
+  transition-duration: 1.05s, 1.05s;
+  transition-timing-function: var(--ease-quart), var(--ease-quart);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before { animation: none; transform: none; }
+}

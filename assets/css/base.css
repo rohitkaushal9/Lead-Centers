@@ -31,10 +31,10 @@
   --surface-3:    #f1f3f9;
 
   /* Shape & depth */
-  --r-sm: 8px;
-  --r-md: 12px;
-  --r-lg: 18px;
-  --r-xl: 26px;
+  --r-sm: 3px;
+  --r-md: 5px;
+  --r-lg: 8px;
+  --r-xl: 10px;
   --shadow-sm: 0 1px 2px rgba(15, 23, 42, .06), 0 1px 3px rgba(15, 23, 42, .04);
   --shadow-md: 0 4px 12px rgba(15, 23, 42, .06), 0 12px 28px rgba(15, 23, 42, .05);
   --shadow-lg: 0 10px 24px rgba(15, 23, 42, .08), 0 28px 60px rgba(15, 23, 42, .08);
@@ -155,3 +155,64 @@ section { padding: 88px 0; }
   border-color: rgba(255, 255, 255, .45);
 }
 .btn--outline-light:hover { background: rgba(255, 255, 255, .12); border-color: #fff; }
+
+/* --- Dark slab tokens ----------------------------------------------------
+   Deep navy surfaces used by .section--dark and the hero. The page stays
+   light; these are punctuation, not a theme. */
+:root {
+  --slab:         #0b2145;  /* slab ground */
+  --slab-2:       #102b56;  /* panel raised on a slab */
+  --slab-3:       #16386b;  /* hover state inside a slab */
+  --slab-line:    rgba(255, 255, 255, .12);
+  --slab-line-2:  rgba(255, 255, 255, .22);
+  --slab-ink:     #f4f8fd;
+  --slab-muted:   #adc2de;
+  --slab-muted-2: #8299ba;
+
+  /* Slow-in, slow-out curves */
+  --ease-quart: cubic-bezier(.76, 0, .24, 1);
+  --ease-sine:  cubic-bezier(.37, 0, .63, 1);
+}
+
+/* --- Dark slabs ----------------------------------------------------------
+   Full-bleed navy sections that break up the light page. A soft wash from
+   the top edge keeps the slab from reading as a flat block. */
+.section--dark {
+  position: relative;
+  background:
+    radial-gradient(900px 420px at 50% -12%, rgba(69, 166, 224, .18) 0%, transparent 68%),
+    var(--slab);
+  color: var(--slab-muted);
+}
+.section--dark h2,
+.section--dark h3,
+.section--dark h4 { color: var(--slab-ink); }
+.section--dark .lede { color: var(--slab-muted); }
+
+/* Ghost buttons invert on any dark surface */
+.section--dark .btn--ghost,
+.hero .btn--ghost {
+  background: transparent;
+  color: #fff;
+  border-color: var(--slab-line-2);
+  box-shadow: none;
+}
+.section--dark .btn--ghost:hover,
+.hero .btn--ghost:hover {
+  background: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .5);
+}
+
+/* Primary buttons switch to the sky accent on navy, where the action blue
+   sits too close to the slab to read as a call to action. */
+.section--dark .btn--primary,
+.hero .btn--primary {
+  background: var(--sky);
+  color: #06203f;
+  box-shadow: 0 1px 2px rgba(69, 166, 224, .3), 0 8px 22px rgba(69, 166, 224, .26);
+}
+.section--dark .btn--primary:hover,
+.hero .btn--primary:hover {
+  background: #63b7ea;
+  box-shadow: 0 2px 5px rgba(69, 166, 224, .34), 0 14px 30px rgba(69, 166, 224, .3);
+}

@@ -198,3 +198,38 @@
   font-size: 13px; color: var(--muted-2);
 }
 
+
+/* --- Hero as a dark slab -------------------------------------------------
+   The hero is the first navy slab. Two gradient washes drift slowly behind
+   the content on ::before, while ::after keeps the existing grid overlay.
+   The inbox card stays light, so it reads as a lit object on a dark ground. */
+.hero {
+  background: var(--slab);
+  color: var(--slab-muted);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -14% 0;              /* bleed, so the drift never exposes an edge */
+  background:
+    radial-gradient(1100px 560px at 78% 10%, rgba(69, 166, 224, .30) 0%, transparent 62%),
+    radial-gradient(820px 480px at 4% 2%,  rgba(26, 86, 168, .46) 0%, transparent 60%);
+  animation: hero-drift 14s var(--ease-sine) infinite alternate;
+  pointer-events: none;
+}
+.hero::after {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .07) 1px, transparent 1px);
+  opacity: 1;
+}
+
+.hero h1 { color: var(--slab-ink); }
+.hero h1 .accent {
+  background: linear-gradient(115deg, var(--sky) 8%, #9ad4f5 94%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero__sub  { color: var(--slab-muted); }
+.hero__note { color: var(--slab-muted-2); }
