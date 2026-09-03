@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Lead Centers">
+  <title>Lead Centers</title>
   <rect width="64" height="64" rx="14" fill="#143a75"/>
-  <text x="32" y="30" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="21" font-weight="700" fill="#ffffff">Lead</text>
-  <text x="32" y="50" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="17" font-weight="700" fill="#45a6e0">Centers</text>
+  <path d="M7 19h8v18h11v8H7Z" fill="#ffffff"/>
+  <path d="M51.16 24.63A9 9 0 1 0 51.16 39.37" fill="none" stroke="#45a6e0"
+        stroke-width="8" stroke-linecap="round"/>
 </svg>
